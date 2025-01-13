@@ -1,59 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博组公开网</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>之行组项目</title>
+<style>
+  /* 在这里添加CSS样式 */
+  body {
+    margin: 0;
+  }
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px;
+  }
+  #logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #search-more {
+    display: flex;
+    align-items: center;
+  }
+  #search-input {
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #more-btn {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #title {
+    text-align: center;
+    font-size: 28px;
+    margin: 20px 0;
+  }
+  #category-a, #category-b {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+  .category-item {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .category-item.selected {
+    background-color: #e0e0e0;
+  }
+  #gray-line {
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+  }
+  #project-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .project {
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .project img {
+    width: 100%;
+    height: auto;
+  }
+  .project-text {
+    padding: 10px;
+    text-align: center;
+  }
+  .project-text h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  .project-text p {
+    margin: 10px 0;
+  }
+  .project-text a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script>
+  // 在这里添加JavaScript脚本
+  $(document).ready(function() {
+    // 初始化类别A和类别B的选中状态
+    $('#category-a .category-item:first-child').addClass('selected');
+    $('#category-b .category-item:first-child').addClass('selected');
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+    // 给类别A的项添加点击事件
+    $('#category-a .category-item').click(function() {
+      // 移除所有选中的样式
+      $('#category-a .category-item, #category-b .category-item').removeClass('selected');
+      // 给点击的项添加选中样式
+      $(this).addClass('selected');
+      // 显示对应的类别B项
+      var index = $(this).index();
+      $('#category-b .category-item').eq(index).addClass('selected');
+    });
 
-        div {
-            background-color: white;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-        }
+    // 给类别B的项添加点击事件
+    $('#category-b .category-item').click(function() {
+      // 移除所有选中的样式
+      $('#category-b .category-item').removeClass('selected');
+      // 给点击的项添加选中样式
+      $(this).addClass('selected');
+      // 更新项目详细信息
+      var index = $(this).index();
+      showProjectDetails(index);
+    });
 
-        h2 {
-            color: #555;
-        }
-
-        video {
-            width: 100%;
-            max-width: 100%;
-        }
-
-        a {
-            display: block;
-            margin-top: 10px;
-            color: #007BFF;
-            text-decoration: none;
-        }
-    </style>
+    // 显示项目详细信息的函数
+    function showProjectDetails(index) {
+      // TODO: 根据索引加载并显示相应的项目详细信息
+    }
+  });
+</script>
 </head>
-
 <body>
-    <h1>博组公开网</h1>
-
-    <div>
-        <h2>初一研学视频</h2>
-        <video controls>
-            <source src="v/275班初一研学视频.mp4" type="video/mp4">
-            您的浏览器不支持HTML5视频。
-        </video>
-        <a href="v/275班初一研学视频.mp4" download>下载视频</a>
+  <!-- 页面内容 -->
+  <div id="header">
+    <!-- Logo和搜索栏 -->
+    <div id="logo">之行组</div>
+    <div id="search-more">
+      <input type="text" id="search-input" placeholder="搜索...">
+      <button id="more-btn">更多</button>
     </div>
-
+  </div>
+  <div id="title">之行组项目</div>
+  <div id="category-a">
+    <!-- 类别A的内容 -->
+    <div class="category-item">图片</div>
+    <div class="category-item">文字</div>
+    <!-- 更多类别A的项 -->
+  </div>
+  <div id="category-b">
+    <!-- 类别B的内容 -->
+    <div class="category-item selected">选中的B项</div>
+    <div class="category-item">其他B项</div>
+    <!-- 更多类别B的项 -->
+  </div>
+  <div id="gray-line"></div>
+  <div id="project-details">
+    <!-- 项目详细信息 -->
+    <div class="project">
+      <img src="photo/xgj.png" alt="Project Image">
+      <div class="project-text">
+        <h2>小管家</h2>
+        <p>请组员加入小管家，方便观看视频</p>
+        <a href="0.html">了解更多</a>
+      </div>
+    </div>
+    <div id="gray-line"></div>
+  <div id="project-details">
+    <!-- 项目详细信息 -->
+    <div class="project">
+      <img src="photo/zxzfzb.jpg" alt="Project Image">
+      <div class="project-text">
+        <h2>之行组发展本初一下册</h2>
+        <p>点击下载PDF文件</p>
+        <a download="files/zxzfzbcyx.pdf">下载</a>
+      </div>
+    </div>
+    <!-- 更多项目 -->
+  </div>
 </body>
-
 </html>
